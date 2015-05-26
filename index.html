@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>ICTU - Docker</title>
+		<title>Docker Pizzasessie</title>
 
 		<meta name="description" content="Docker preza">
 		<meta name="author" content="Jeroen Peeters">
@@ -16,9 +16,12 @@
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/sky.css" id="theme">
+		<link rel="stylesheet" href="css/ovs-theme.css">
 
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -32,9 +35,23 @@
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
+
 	</head>
 
 	<body>
+
+		<div id="logo_container" style="display: flex; flex-direction: column;">
+			<div style="flex-grow: 1; text-align:center">
+				<img id="logo" src="images/logo-ovs.jpg"/>
+			</div>
+			<ol id="index" style="flex-grow: 3">
+				<li id="indexDockerIntro">Intro to Docker</li>
+				<li id="indexEcosystem">Ecosystem</li>
+				<li id="indexComposition">App Composition</li>
+				<li id="indexTool">Containers as Tool</li>
+				<li id="indexICTU">Docker @ ICTU</li>
+			</ol>
+		</div>
 
 		<div class="reveal">
 
@@ -42,33 +59,123 @@
 			<div class="slides">
 
 				<section>
+					<img src="images/docker.png" style="width:300px; border:0px; background:none; box-shadow: none;" />
+					<aside class="notes">
+						Intro
+					</aside>
+				</section>
+
+				<section id="overviewindex" data-state="overviewindex">
+					<h2>Overview</h2>
+					<div class="fragment current-visible fade-out">Intro to Docker</div>
+					<div class="fragment current-visible fade-out">Containers vs. Virtuals</div>
+					<div class="fragment current-visible fade-out">Ecosystem</div>
+					<div class="fragment current-visible fade-out">Application Composition</div>
+					<div class="fragment current-visible fade-out">Containers as Tool</div>
+					<div class="fragment current-visible fade-out">Docker &amp; ICTU</div>
+				</section>
+
+				<section data-state="indexDockerIntro">
 					<section>
-						<h2>Intro Docker</h2>
+						<h2>Intro to Docker</h2>
 					</section>
 					<section>
-						<h2>Container Model</h2>
-						<img src="images/container-vs-virtual.png" style="width:700px; border:0; border-radius:2px 7px;" />
+						Build, Ship and Run Any App, Anywhere
+						<aside class="notes">
+							Belofte: self-contained apps.
+						</aside>
 					</section>
 					<section>
-						<h2>Self Contained Images</h2>
 						<img src="images/docker-image.png" style="width:700px; border:0; border-radius:2px 7px; background-color:white;" />
+						<aside class="notes">
+							Run anywhere: Self Contained Images
+						</aside>
+					</section>
+				  <section>
+						<img src="images/docker-layers.png" />
+						<aside class="notes">
+							Operating system and Docker
+						</aside>
 					</section>
 					<section>
-						<h2>Application Composition</h2>
-						<img src="images/docker-linking.jpg" style="width:700px; border:0; border-radius:2px 7px; background-color:white;" />
+						<div class="fragment">Build</div>
+						<div class="fragment">Run</div>
+						<div class="fragment">Link</div>
+						<div class="fragment">Volume</div>
+						<div class="fragment">UnionFS</div>
+						<aside class="notes">
+							Docker Lingo
+						</aside>
 					</section>
 					<section>
-						<h2>Ecosystem</h2>
-						<img src="images/docker-ecosystem.jpg" style="width:700px; border:0; border-radius:2px 7px; background-color:white;" />
+						<div class="fragment">pid namespace</div>
+						<div class="fragment">net namespace</div>
+						<div class="fragment">mnt namespace</div>
+						<aside class="notes">
+							Namespaces
+							process network, mount-point, isolation
+						</aside>
+					</section>
+					<section>
+						<h2>Hello world</h2>
+						<div>sudo docker run ubuntu:14.04 /bin/echo 'Hello world'</div>
+						<aside class="notes">
+						</aside>
+					</section>
+					<section>
+						<h2>Hello world</h2>
+						<div>sudo docker run -t -i ubuntu:14.04 /bin/bash</div>
+						<aside class="notes">
+							-t: terminal, -i interactive
+						</aside>
+					</section>
+					<section>
+						<h2>Hello world</h2>
+						<div>sudo docker run -d ubuntu:14.04 /bin/sh -c "while true; do echo hello world; sleep 1; done"</div>
+						<aside class="notes">
+							check docker logs
+						</aside>
 					</section>
 				</section>
 
+				<section data-state="indexEcosystem">
+					<section>
+						<h2>Ecosystem</h2>
+					</section>
+			  </section>
+
+				<section data-state="indexComposition">
+					<section>
+						<h2>Application Composition</h2>
+					</section>
+				</section>
+
+				<section data-state="indexTool">
+					<section>
+						<h2>Container as a Tool</h2>
+					</section>
+				</section>
+
+				<section data-state="indexICTU">
+					<section>
+						<h2>Docker @ ICTU</h2>
+					</section>
+				</section>
+
+
+
+
 				<section>
-					<img src="images/logo-ictu.png" style="border:0px; background:none; box-shadow: none;" /> <br />
-					<img src="images/docker.png" style="width:300px; border:0px; background:none; box-shadow: none;" />
-					<aside class="notes">
-						Notes
-					</aside>
+					<h2>Container Model</h2>
+					<img src="images/container-vs-virtual.png" style="width:700px; border:0; border-radius:2px 7px;" />
+				</section>
+				<section>
+					<h2>Application Composition</h2>
+					<img src="images/docker-linking.jpg" style="width:700px; border:0; border-radius:2px 7px; background-color:white;" />
+				</section>
+				<section>
+					<h2>Ecosystem</h2>
+					<img src="images/docker-ecosystem.jpg" style="width:700px; border:0; border-radius:2px 7px; background-color:white;" />
 				</section>
 
 				<section>
@@ -116,12 +223,12 @@
 
 				<section>
 					<h2>Docker as a Service</h2>
-					<ul>
-						<li>Interface voor Docker Cluster</li>
-						<li>Gebaseerd op Docker Compose</li>
-					</ul>
+
 					<aside class="notes">
-						Start Docker Containers op willekeurige node in cluster.
+						<ul>
+							<li>Interface voor Docker Cluster</li>
+							<li>Gebaseerd op Docker Compose</li>
+						</ul>
 					</aside>
 				</section>
 
@@ -164,10 +271,11 @@
 			// Full list of configuration options available at:
 			// https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
-				controls: true,
+				controls: true, //enbale visible controls
 				progress: true,
 				history: true,
 				center: true,
+				embedded: true,
 
 				transition: 'slide', // none/fade/slide/convex/concave/zoom
 
@@ -181,6 +289,24 @@
 					{ src: 'plugin/notes/notes.js', async: true }
 				]
 			});
+
+			indexEvents = function(event) {
+				$('#index li').removeClass('current');
+				$('#'+event.type).addClass('current');
+			}
+
+			var indexClasses = [
+				'overviewindex',
+				'indexDockerIntro',
+				'indexEcosystem',
+				'indexComposition',
+				'indexTool',
+				'indexICTU'
+			]
+
+			for( var classname of indexClasses){
+				Reveal.addEventListener(classname, indexEvents, false);
+			}
 
 		</script>
 

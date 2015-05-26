@@ -1,0 +1,60 @@
+#logo {
+  position: block;
+  margin-top: 20px;
+  width: 100px;
+  border: 0px;
+  background: none;
+  box-shadow: none;
+}
+
+
+#logo_container {
+  position: absolute;
+  z-index: 10000;
+  text-align: center;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width:20%;
+  background-color: #FDFDFD;
+}
+
+#index {
+  display: flex;
+  flex-direction: column;
+  padding-left:0;
+  height:50%;
+  text-align:center;
+  list-style: none;
+  visibility:hidden;
+}
+#index.visible {
+  
+}
+#index li {
+  padding-left:0;
+  flex-grow: 1;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 16px;
+  color: lightgrey;
+}
+#index li.current {
+  color: grey;
+  font-weight: bold;
+}
+
+div.slides {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  width: 90% !important;
+}
+
+.reveal {
+  position: absolute;
+  width:90%;
+  height: 100%;
+  top: 0;
+  left: 20%;
+  padding-right: 0;
+  text-align:center;
+}
