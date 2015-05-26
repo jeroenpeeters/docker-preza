@@ -7,6 +7,12 @@
   box-shadow: none;
 }
 
+.reveal .slides section .fragment.current-visible.current-fragment {
+  display:block !important;
+}
+.reveal .slides section .fragment.fade-out.visible {
+  display:none;
+}
 
 #logo_container {
   position: absolute;
@@ -29,7 +35,7 @@
   visibility:hidden;
 }
 #index.visible {
-  
+  visibility:visible;
 }
 #index li {
   padding-left:0;

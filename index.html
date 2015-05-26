@@ -65,8 +65,9 @@
 					</aside>
 				</section>
 
-				<section id="overviewindex" data-state="overviewindex">
+				<section id="overviewindex" data-state="overviewindex_">
 					<h2>Overview</h2>
+					<br/><br/>
 					<div class="fragment current-visible fade-out">Intro to Docker</div>
 					<div class="fragment current-visible fade-out">Containers vs. Virtuals</div>
 					<div class="fragment current-visible fade-out">Ecosystem</div>
@@ -118,23 +119,33 @@
 					</section>
 					<section>
 						<h2>Hello world</h2>
-						<div>sudo docker run ubuntu:14.04 /bin/echo 'Hello world'</div>
+						<pre style="width:580px;"><code data-trim>docker run ubuntu:14.04 /bin/echo 'Hello world'</code></pre>
 						<aside class="notes">
 						</aside>
 					</section>
 					<section>
-						<h2>Hello world</h2>
-						<div>sudo docker run -t -i ubuntu:14.04 /bin/bash</div>
+						<h2>Hello world interactive</h2>
+						<pre style="width:480px;"><code data-trim>docker run -t -i ubuntu:14.04 /bin/bash</code></pre>
 						<aside class="notes">
 							-t: terminal, -i interactive
 						</aside>
 					</section>
 					<section>
-						<h2>Hello world</h2>
-						<div>sudo docker run -d ubuntu:14.04 /bin/sh -c "while true; do echo hello world; sleep 1; done"</div>
+						<h2>Hello world detached</h2>
+						<pre style="width:610px;"><code data-trim>docker run -d ubuntu:14.04 /bin/sh -c \
+  "while true; do echo hello world; sleep 1; done"</code></pre>
 						<aside class="notes">
 							check docker logs
 						</aside>
+					</section>
+					<section>
+						<h2>Jenkins</h2>
+						<pre style="width:380px;"><code data-trim>docker run -p 8080:8080 jenkins</code></pre>
+					</section>
+					<!-- Examples with linking? volumes? -->
+					<section>
+						<h2>Dockerfile</h2>
+						<pre style="width:800px;"><code data-trim>#TODO</code></pre>
 					</section>
 				</section>
 
@@ -142,17 +153,147 @@
 					<section>
 						<h2>Ecosystem</h2>
 					</section>
+					<section>
+						<h2>Docker Hub</h2>
+						<img src="images/docker-hub.png" style="border:0; border-radius:0; width:600px;"/><br/>
+						<a href="http://hub.docker.com" target="_blank">hub.docker.com</a>
+					</section>
+					<section>
+						<img src="images/docker.png" style="border:0; border-radius:0; box-shadow:initial;background: initial; width:200px;"/><br/>
+						<ul>
+							<li>Docker Compose</li>
+							<li>Docker Machine</li>
+						</ul>
+						<aside class="notes">
+							container composition <br/>
+							machine provisioning (install docker) local,server,cloud,virtuals <br />
+							but.. where does it run?
+						</aside>
+					</section>
+					<section>
+						<img src="images/coreos-logo.png" style="border:0; border-radius:0"/>
+					</section>
+					<section>
+						<h2>Fleet by</h2><img src="images/coreos-logo.png" style="border:0; width:200px;"/>
+						<aside class="notes">
+							ETCD -> distributed key/value store <br />
+							systemd -> service definition (initd, upstart replacement) <br />
+							what about cloud?
+						</aside>
+					</section>
+					<section>
+						<h2>Flannel</h2>
+						<img src="images/flannel.png" style="width:60%; border:0;"/>
+						<aside class="notes">
+							Overlay network
+						</aside>
+					</section>
+					<section>
+						<img src="images/kubernetes.jpg" style="width:60%; border:0;"/>
+						<aside class="notes">
+							Manage cluster of containers as single system
+						</aside>
+					</section>
+					<section>
+						<img src="images/mesos_logo.png" style="border:0;"/>
+						<p>+<p><p>Apache Marathon</p>
+						<aside class="notes">
+							Datacenter as single pool of resources
+						</aside>
+					</section>
+					<section>
+						<img src="images/docker-ecosystem.jpg" style="width:60%; border:0;" />
+						<aside class="notes">
+							Many, many more...
+						</aside>
+					</section>
 			  </section>
 
 				<section data-state="indexComposition">
 					<section>
 						<h2>Application Composition</h2>
+						<p>Docker Compose</p>
+						<aside class="notes">
+							Declarative
+						</aside>
 					</section>
+					<section>
+						<pre><code data-trim>
+
+web:
+  image: myregistry/mywebapp:1.0
+  links:
+    - db
+  ports:
+    - "8000:8000"
+db:
+  image: postgres
+						</code></pre>
+						<aside class="notes">
+							yaml file <br/>
+							docker-compose up
+						</aside>
+					</section>
+					<section>
+						<pre><code data-trim>
+
+web:
+  image: myregistry/mywebapp:1.0
+  volumes_from:
+    - ftp
+ftp:
+  image: stilliard/pure-ftpd
+  volumes:
+    - /share/ftphome
+						</code></pre>
+					</section>
+
 				</section>
 
 				<section data-state="indexTool">
 					<section>
 						<h2>Container as a Tool</h2>
+					</section>
+					<section>
+						<h2>Maven</h2>
+						<p>
+							Without Docker
+						</p>
+						<pre style="width:650px;"><code data-trim>
+mvn archetype:generate -DgroupId=nl.ovs.demo \
+  -DartifactId=demoapp \
+  -DarchetypeArtifactId=maven-archetype-quickstart \
+  -DinteractiveMode=false
+						</code></pre>
+					</section>
+					<section>
+						<h2>Maven</h2>
+						<p>
+							Dockerized
+						</p>
+						<pre style="width:650px;"><code data-trim>
+docker run -it --rm --name my-maven-project \
+  -v "$PWD":/usr/src/mymaven \
+  -w /usr/src/mymaven \
+  maven:3.2-jdk-7 \
+  mvn archetype:generate -DgroupId=nl.ovs.demo \
+  -DartifactId=demoapp \
+  -DarchetypeArtifactId=maven-archetype-quickstart \
+  -DinteractiveMode=false
+						</code></pre>
+					</section>
+					<section>
+						<h2>Maven</h2>
+						<p>
+							Install
+						</p>
+						<pre style="width:650px;"><code data-trim>
+docker run -it --rm --name my-maven-project \
+	-v "$PWD":/usr/src/mymaven \
+	-w /usr/src/mymaven \
+	maven:3.2-jdk-7 \
+	mvn clean install
+						</code></pre>
 					</section>
 				</section>
 
@@ -160,102 +301,98 @@
 					<section>
 						<h2>Docker @ ICTU</h2>
 					</section>
-				</section>
 
+					<section>
+						<h2>Hoe het begon</h2>
+						<img src="images/trein1.png" style="width:700px; border:0; border-radius:2px 7px; background-color:white;" />
+						<aside class="notes">
+							1 trein op rails, botsingen. lange wachttijden
+						</aside>
+					</section>
 
+					<section>
+						<h2>Met Docker</h2>
+						<img src="images/trein2.png" style="width:700px; border:0; border-radius:2px 7px; background-color:white;" />
+						<aside class="notes">
+							Parallel bouwen, parallel testen.
+						</aside>
+					</section>
 
+					<section>
+						<h2>Tooling</h2>
+						<img src="images/tooling1.png" style="width:700px; border:0; border-radius:2px 7px; background-color:white;" />
+						<aside class="notes">
+							Jenkins, Sonar, 1 test-server, 1-ART server.
+							1 Stack voor hele afdeling
+						</aside>
+					</section>
 
-				<section>
-					<h2>Container Model</h2>
-					<img src="images/container-vs-virtual.png" style="width:700px; border:0; border-radius:2px 7px;" />
-				</section>
-				<section>
-					<h2>Application Composition</h2>
-					<img src="images/docker-linking.jpg" style="width:700px; border:0; border-radius:2px 7px; background-color:white;" />
-				</section>
-				<section>
-					<h2>Ecosystem</h2>
-					<img src="images/docker-ecosystem.jpg" style="width:700px; border:0; border-radius:2px 7px; background-color:white;" />
-				</section>
+					<section>
+						<h2>Met Docker</h2>
+						<img src="images/tooling2.png" style="width:700px; border:0; border-radius:2px 7px; background-color:white;" />
+						<aside class="notes">
+							Jenkins, Sonar, 1 test-server, 1-ART server.
+							Stack per team
+						</aside>
+					</section>
 
-				<section>
-					<h2>Agenda</h2>
-					<ul>
-						<li>Docker@ICTU</li>
-						<li>Demo</li>
-						<li>Workshop/brainstormsessie</li>
-					</ul>
-				</section>
+					<section>
+						<h2>Docker as a Service</h2>
 
-				<section>
-					<h2>Hoe het begon</h2>
-					<img src="images/trein1.png" style="width:700px; border:0; border-radius:2px 7px; background-color:white;" />
-					<aside class="notes">
-						1 trein op rails, botsingen. lange wachttijden
-					</aside>
-				</section>
+						<aside class="notes">
+							<ul>
+								<li>Interface voor Docker Cluster</li>
+								<li>Gebaseerd op Docker Compose</li>
+							</ul>
+						</aside>
+					</section>
 
-				<section>
-					<h2>Met Docker</h2>
-					<img src="images/trein2.png" style="width:700px; border:0; border-radius:2px 7px; background-color:white;" />
-					<aside class="notes">
-						Parallel bouwen, parallel testen.
-					</aside>
-				</section>
-
-				<section>
-					<h2>Tooling</h2>
-					<img src="images/tooling1.png" style="width:700px; border:0; border-radius:2px 7px; background-color:white;" />
-					<aside class="notes">
-						Jenkins, Sonar, 1 test-server, 1-ART server.
-						1 Stack voor hele afdeling
-					</aside>
-				</section>
-
-				<section>
-					<h2>Met Docker</h2>
-					<img src="images/tooling2.png" style="width:700px; border:0; border-radius:2px 7px; background-color:white;" />
-					<aside class="notes">
-						Jenkins, Sonar, 1 test-server, 1-ART server.
-						Stack per team
-					</aside>
-				</section>
-
-				<section>
-					<h2>Docker as a Service</h2>
-
-					<aside class="notes">
+					<section>
+						<h2>Discovery as a Service</h2>
 						<ul>
-							<li>Interface voor Docker Cluster</li>
-							<li>Gebaseerd op Docker Compose</li>
+							<li>DNS entry per container</li>
 						</ul>
-					</aside>
+						<aside class="notes">
+							Elke container krijgt eigen IP + HostName in DNS, skydns
+						</aside>
+					</section>
+
+					<section>
+						<h2>Application as a Service</h2>
+						<ul>
+							<li>Application = { gelinkte containers }</li>
+							<li>Dashboard voor Starten/Stoppen</li>
+							<li>API voor applicatie creatie</li>
+						</ul>
+						<aside class="notes">
+							Automation vanuit Jenkins
+						</aside>
+					</section>
+
+					<section>
+						<h2>Demo</h2>
+					</section>
 				</section>
 
-				<section>
-					<h2>Discovery as a Service</h2>
-					<ul>
-						<li>DNS entry per container</li>
-					</ul>
-					<aside class="notes">
-						Elke container krijgt eigen IP + HostName in DNS
-					</aside>
-				</section>
-
-				<section>
-					<h2>Application as a Service</h2>
-					<ul>
-						<li>Application = { gelinkte containers }</li>
-						<li>Dashboard voor Starten/Stoppen</li>
-						<li>API voor applicatie creatie</li>
-					</ul>
-					<aside class="notes">
-						Automation vanuit Jenkins
-					</aside>
-				</section>
-
-				<section>
-					<h2>Demo</h2>
+				<section data-state="indexHandson">
+					<section>
+						<h2>Hands-On Lab</h2>
+						<ol style="width:500px;">
+							<li>Start WordPress container</li>
+							<li>Link to a database container</li>
+							<li>Make the database persistent</li>
+						</ol>
+						<p>
+							docker run --help
+						</p>
+					</section>
+					<section>
+						<pre><code data-trim>
+docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=rootpw -d \
+  -v "$PWD/wp-data":/var/lib/mysql mysql:5.5
+docker run --name some-wordpress --link some-mysql:mysql -d -p 8181:80 wordpress
+						</code></pre>
+					</section>
 				</section>
 
 
@@ -293,10 +430,18 @@
 			indexEvents = function(event) {
 				$('#index li').removeClass('current');
 				$('#'+event.type).addClass('current');
+
+				if($('#'+event.type).length > 0){
+					console.log('addClass visible', event.type);
+					$('#index').addClass('visible');
+				}else{
+					console.log('removeClass visible', event.type);
+					$('#index').removeClass('visible');
+				}
 			}
 
 			var indexClasses = [
-				'overviewindex',
+				'overviewindex_',
 				'indexDockerIntro',
 				'indexEcosystem',
 				'indexComposition',
