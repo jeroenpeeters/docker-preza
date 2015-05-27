@@ -60,19 +60,16 @@
 
 				<section>
 					<img src="images/docker.png" style="width:300px; border:0px; background:none; box-shadow: none;" />
-					<aside class="notes">
-						Intro
-					</aside>
 				</section>
 
 				<section id="overviewindex" data-state="overviewindex_">
 					<h2>Overview</h2>
 					<br/><br/>
-					<div class="fragment current-visible fade-out">Intro to Docker</div>
-					<div class="fragment current-visible fade-out">Ecosystem</div>
-					<div class="fragment current-visible fade-out">Application Composition</div>
-					<div class="fragment current-visible fade-out">Containers as Tool</div>
-					<div class="fragment current-visible fade-out">Docker &amp; ICTU</div>
+					<div class="fragment">Intro to Docker</div>
+					<div class="fragment">Ecosystem</div>
+					<div class="fragment">Application Composition</div>
+					<div class="fragment">Containers as Tool</div>
+					<div class="fragment">Docker &amp; ICTU</div>
 				</section>
 
 				<section data-state="indexDockerIntro">
@@ -80,7 +77,7 @@
 						<h2>Intro to Docker</h2>
 					</section>
 					<section>
-						Build, Ship and Run Any App, Anywhere
+						<h2>Build, Ship and Run</h2><h2>Any App, Anywhere</h2>
 						<aside class="notes">
 							Belofte: self-contained apps.
 						</aside>
@@ -167,10 +164,11 @@
 						<a href="http://hub.docker.com" target="_blank">hub.docker.com</a>
 					</section>
 					<section>
-						<img src="images/docker.png" style="border:0; border-radius:0; box-shadow:initial;background: initial; width:200px;"/><br/>
+						<img src="images/docker.png" style="border:0; border-radius:0; width:200px;"/><br/>
 						<ul>
-							<li>Docker Compose</li>
-							<li>Docker Machine</li>
+							<li>Compose</li>
+							<li>Machine</li>
+							<li>Swarm</li>
 						</ul>
 						<aside class="notes">
 							container composition <br/>
@@ -179,7 +177,7 @@
 						</aside>
 					</section>
 					<section>
-						<img src="images/coreos-logo.png" style="border:0; border-radius:0"/>
+						<img src="images/coreos-logo.png" style="border:0;"/>
 					</section>
 					<section>
 						<h2>Fleet by</h2><img src="images/coreos-logo.png" style="border:0; width:200px;"/>
@@ -417,7 +415,7 @@ docker run --name some-wordpress --link some-mysql:mysql -d -p 8181:80 wordpress
 			// https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
 				controls: true, //enbale visible controls
-				progress: true,
+				progress: false,
 				history: true,
 				center: true,
 				embedded: true,
