@@ -10,6 +10,10 @@
 }
 
 @media (min-width: 800px) {
+  body.hidebar > #logo_container {
+    width:0;
+  }
+
   #logo {
     position: block;
     margin-top: 20px;
@@ -28,6 +32,7 @@
     bottom: 0;
     width:20%;
     background-color: #FDFDFD;
+    transition: all 1s;
   }
 
   #index {
@@ -55,10 +60,17 @@
     font-weight: bold;
     font-size:25px;
   }
+  body.hidebar .reveal {
+    width:100%;
+    left:0;
+  }
   .reveal {
     position: absolute;
     width:90%;
     left:20%;
+  }
+  body.hidebar div.slides {
+    width: 100% !important;
   }
   div.slides {
     margin-left: 0px !important;
@@ -152,16 +164,16 @@ img {
 }
 
 .indexICTU body {
-  background: #fb83fa; /* Old browsers */
-  background: -moz-radial-gradient(center, ellipse cover,  #fb83fa 0%, #e93cec 100%); /* FF3.6+ */
-  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#fb83fa), color-stop(100%,#e93cec)); /* Chrome,Safari4+ */
-  background: -webkit-radial-gradient(center, ellipse cover,  #fb83fa 0%,#e93cec 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-radial-gradient(center, ellipse cover,  #fb83fa 0%,#e93cec 100%); /* Opera 12+ */
-  background: -ms-radial-gradient(center, ellipse cover,  #fb83fa 0%,#e93cec 100%); /* IE10+ */
-  background: radial-gradient(ellipse at center,  #fb83fa 0%,#e93cec 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fb83fa', endColorstr='#e93cec',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  background: #e570e7; /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover,  #e570e7 0%, #c85ec7 47%, #a849a3 100%); /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#e570e7), color-stop(47%,#c85ec7), color-stop(100%,#a849a3)); /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover,  #e570e7 0%,#c85ec7 47%,#a849a3 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover,  #e570e7 0%,#c85ec7 47%,#a849a3 100%); /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover,  #e570e7 0%,#c85ec7 47%,#a849a3 100%); /* IE10+ */
+  background: radial-gradient(ellipse at center,  #e570e7 0%,#c85ec7 47%,#a849a3 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e570e7', endColorstr='#a849a3',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
 .indexICTU #index > .current {
-  background: #fb83fa;
+  background: #e570e7;
 }

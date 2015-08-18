@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Docker Pizzasessie</title>
+		<title>Docker</title>
 
 		<meta name="description" content="Docker preza">
 		<meta name="author" content="Jeroen Peeters">
@@ -38,13 +38,16 @@
 
 	</head>
 
-	<body>
+	<body class="hidebar">
 
 		<div id="logo_container" style="display: flex; flex-direction: column;">
-			<div style="flex-grow: 1; text-align:center">
-				<img id="logo" src="images/logo-ovs.jpg"/>
-			</div>
-			<ol id="index" style="flex-grow: 3">
+			<!--div style="flex-grow: 1; text-align:center; padding-top:40px;">
+				<a href="#" alt="First page" title="First page" style="font-size:200%; color:#039BC6; font-family: sans-serif; text-decoration:none">
+					JeroenPeeters.nl
+					<img id="logo" src="images/logo-ictu2.png"/>
+				</a>
+			</div-->
+			<ol id="index" style="flex-grow:3;margin:0">
 				<li id="indexDockerIntro">Intro to Docker</li>
 				<li id="indexEcosystem">Ecosystem</li>
 				<li id="indexComposition">App Composition</li>
@@ -59,7 +62,33 @@
 			<div class="slides">
 
 				<section>
-					<img src="images/docker.png" style="width:300px; border:0px; background:none; box-shadow: none;" />
+					<img src="images/docker.png" style="width:300px; border:0px; background:none !important; box-shadow: none;" />
+				</section>
+
+				<section id="aboutme" data-state="aboutme_">
+					<section>
+						<img src="images/jeroen.jpg" style="width:150px;  border:0px; border-radius:5px;" />
+						<div>
+							Jeroen Peeters <br />
+							<span style="font-size:50%">Software Engineer</a>
+						</div>
+					</section>
+
+					<section>
+						<img id="logo" style="width:250px;  border-radius:5px;" src="images/logo-ovs.jpg"/> <br/>
+					</section>
+
+					<section>
+						<img id="logo" style="width:250px;  border-radius:5px;" src="images/logo-ictu2.png"/> <br/>
+						Innovation &amp; Quality Team
+					</section>
+
+					<section>
+						<img id="logo" style="width:150px;border-radius:5px;" src="images/java.png"/> <br/>
+						<img id="logo" style="width:150px;border-radius:5px;" src="images/cpp.jpg"/> <br/>
+						<img id="logo" style="width:150px;border-radius:5px;" src="images/nodejs.png"/> <br/>
+					</section>
+
 				</section>
 
 				<section id="overviewindex" data-state="overviewindex_">
@@ -147,10 +176,135 @@
 						<h2>Jenkins</h2>
 						<pre style="width:380px;"><code data-trim>docker run -p 8080:8080 jenkins</code></pre>
 					</section>
-					<!-- Examples with linking? volumes? -->
 					<section>
-						<h2>Dockerfile</h2>
-						<pre style="width:800px;"><code data-trim>#TODO</code></pre>
+						<pre style="box-shadow:initial">
+							<code style="max-height:600px" data-trim>
+FROM java:openjdk-7u65-jdk
+
+RUN apt-get update && apt-get install -y wget git curl zip && rm -rf /var/lib/apt/lists/*
+
+ENV JENKINS_HOME /var/jenkins_home
+
+# Jenkins is ran with user `jenkins`, uid = 1000
+# If you bind mount a volume from host/vloume from a data container,
+# ensure you use same uid
+RUN useradd -d "$JENKINS_HOME" -u 1000 -m -s /bin/bash jenkins
+
+# Jenkins home directoy is a volume, so configuration and build history
+# can be persisted and survive image upgrades
+VOLUME /var/jenkins_home
+
+# `/usr/share/jenkins/ref/` contains all reference configuration we want
+# to set on a fresh new installation. Use it to bundle additional plugins
+# or config file with your custom jenkins Docker image.
+RUN mkdir -p /usr/share/jenkins/ref/init.groovy.d
+
+
+COPY init.groovy /usr/share/jenkins/ref/init.groovy.d/tcp-slave-agent-port.groovy
+
+ENV JENKINS_VERSION 1.596.2
+
+# could use ADD but this one does not check Last-Modified header
+# see https://github.com/docker/docker/issues/8331
+RUN curl -L http://mirrors.jenkins-ci.org/war-stable/$JENKINS_VERSION/jenkins.war -o /usr/share/jenkins/jenkins.war
+
+ENV JENKINS_UC https://updates.jenkins-ci.org
+RUN chown -R jenkins "$JENKINS_HOME" /usr/share/jenkins/ref
+
+# for main web interface:
+EXPOSE 8080
+
+# will be used by attached slave agents:
+EXPOSE 50000
+
+USER jenkins
+
+COPY jenkins.sh /usr/local/bin/jenkins.sh
+							</code>
+						</pre>
+					</section>
+					<section>
+						<pre><code data-trim>
+FROM eboraas/debian:stable
+MAINTAINER Ed Boraas &lt;ed@boraas.ca&gt;
+
+RUN apt-get update && apt-get -y install apache2 && apt-get clean
+
+ENV APACHE_RUN_USER www-data
+ENV APACHE_RUN_GROUP www-data
+ENV APACHE_LOG_DIR /var/log/apache2
+
+RUN /bin/ln -sf ../sites-available/default-ssl /etc/apache2/sites-enabled/001-default-ssl
+RUN /bin/ln -sf ../mods-available/ssl.conf /etc/apache2/mods-enabled/
+RUN /bin/ln -sf ../mods-available/ssl.load /etc/apache2/mods-enabled/
+
+EXPOSE 80
+EXPOSE 443
+
+CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+						</code></pre>
+					</section>
+					<section>
+						<pre><code style="max-height:600px" data-trim>
+FROM debian:wheezy
+
+# add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
+RUN groupadd -r mysql && useradd -r -g mysql mysql
+
+# FATAL ERROR: please install the following Perl modules before executing /usr/local/mysql/scripts/mysql_install_db:
+# File::Basename
+# File::Copy
+# Sys::Hostname
+# Data::Dumper
+RUN apt-get update && apt-get install -y perl --no-install-recommends && rm -rf /var/lib/apt/lists/*
+
+# mysqld: error while loading shared libraries: libaio.so.1: cannot open shared object file: No such file or directory
+RUN apt-get update && apt-get install -y libaio1 && rm -rf /var/lib/apt/lists/*
+
+# gpg: key 5072E1F5: public key "MySQL Release Engineering &lt;mysql-build@oss.oracle.com&gt;" imported
+RUN gpg --keyserver pool.sks-keyservers.net --recv-keys A4A9406876FCBD3C456770C88C718D3B5072E1F5
+
+ENV MYSQL_MAJOR 5.5
+ENV MYSQL_VERSION 5.5.43
+
+# note: we're pulling the *.asc file from mysql.he.net instead of dev.mysql.com because the official mirror 404s that file for whatever reason - maybe it's at a different path?
+RUN apt-get update && apt-get install -y curl --no-install-recommends && rm -rf /var/lib/apt/lists/* \
+	&& curl -SL "http://dev.mysql.com/get/Downloads/MySQL-$MYSQL_MAJOR/mysql-$MYSQL_VERSION-linux2.6-x86_64.tar.gz" -o mysql.tar.gz \
+	&& curl -SL "http://mysql.he.net/Downloads/MySQL-$MYSQL_MAJOR/mysql-$MYSQL_VERSION-linux2.6-x86_64.tar.gz.asc" -o mysql.tar.gz.asc \
+	&& apt-get purge -y --auto-remove curl \
+	&& gpg --verify mysql.tar.gz.asc \
+	&& mkdir /usr/local/mysql \
+	&& tar -xzf mysql.tar.gz -C /usr/local/mysql --strip-components=1 \
+	&& rm mysql.tar.gz* \
+	&& rm -rf /usr/local/mysql/mysql-test /usr/local/mysql/sql-bench \
+	&& rm -rf /usr/local/mysql/bin/*-debug /usr/local/mysql/bin/*_embedded \
+	&& find /usr/local/mysql -type f -name "*.a" -delete \
+	&& apt-get update && apt-get install -y binutils && rm -rf /var/lib/apt/lists/* \
+	&& { find /usr/local/mysql -type f -executable -exec strip --strip-all '{}' + || true; } \
+	&& apt-get purge -y --auto-remove binutils
+ENV PATH $PATH:/usr/local/mysql/bin:/usr/local/mysql/scripts
+
+# replicate some of the way the APT package configuration works
+# this is only for 5.5 since it doesn't have an APT repo, and will go away when 5.5 does
+RUN mkdir -p /etc/mysql/conf.d \
+	&& { \
+		echo '[mysqld]'; \
+		echo '!includedir /etc/mysql/conf.d/'; \
+	} &gt; /etc/mysql/my.cnf \
+	&& { \
+		echo '[mysqld]'; \
+		echo 'user = mysql'; \
+		echo 'datadir = /var/lib/mysql'; \
+	} &gt; /etc/mysql/conf.d/docker.cnf
+
+VOLUME /var/lib/mysql
+
+COPY docker-entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+
+EXPOSE 3306
+CMD ["mysqld"]
+						</code></pre>
 					</section>
 				</section>
 
@@ -202,9 +356,15 @@
 					</section>
 					<section>
 						<img src="images/mesos_logo.png" style="border:0;"/>
-						<p>+<p><p>Apache Marathon</p>
+						<p><p>Apache Marathon</p>
 						<aside class="notes">
 							Datacenter as single pool of resources
+						</aside>
+					</section>
+					<section>
+						<img src="images/rancher.png" style="border:0;"/>
+						<aside class="notes">
+							OS of 20mb + mgmt dashboard
 						</aside>
 					</section>
 					<section>
@@ -216,6 +376,17 @@
 			  </section>
 
 				<section data-state="indexComposition">
+					<section>
+						<h2>Application Composition</h2>
+						<p>Manual</p>
+					</section>
+					<section>
+						<pre><code data-trim>
+docker run --name my-mysql -e MYSQL_ROOT_PASSWORD=rootpw -d \
+	-v "$PWD/wp-data":/var/lib/mysql mysql:5.5
+docker run --name my-wordpress --link my-mysql:mysql -d -p 80:80 wordpress
+						</code></pre>
+					</section>
 					<section>
 						<h2>Application Composition</h2>
 						<p>Docker Compose</p>
@@ -380,7 +551,7 @@ docker run -it --rm --name my-maven-project \
 					</section>
 				</section>
 
-				<section data-state="indexHandson">
+				<!-- section data-state="indexHandson">
 					<section>
 						<h2>Hands-On Lab</h2>
 						<ol style="width:500px;">
@@ -399,6 +570,31 @@ docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=rootpw -d \
 docker run --name some-wordpress --link some-mysql:mysql -d -p 8181:80 wordpress
 						</code></pre>
 					</section>
+				</section -->
+
+				<section data-state="presenterInfo">
+					<table>
+						<tr>
+							<td style="border:0"><img style="width:50px;border-radius:5px" id="logo" src="images/email.png" /></td>
+							<td style="border:0;vertical-align:middle">jeroen@peetersweb.nl</td>
+						</tr>
+						<tr>
+							<td style="border:0"><img style="width:50px;border-radius:5px" id="logo" src="images/github.png" /></td>
+							<td style="border:0;vertical-align:middle">jeroenpeeters</td>
+						</tr>
+						<tr>
+							<td style="border:0"><img style="width:50px;border-radius:5px" id="logo" src="images/twitter.png" /></td>
+							<td style="border:0;vertical-align:middle">jeroenpeeters</td>
+						</tr>
+						<tr>
+							<td style="border:0"><img style="width:50px;border-radius:5px" id="logo" src="images/linkedin.png" /></td>
+							<td style="border:0;vertical-align:middle">jeroenp</td>
+						</tr>
+						<tr>
+							<td style="border:0"><img style="width:50px;border-radius:5px" id="logo" src="images/rss.png" /></td>
+							<td style="border:0;vertical-align:middle">jeroenpeeters.nl</td>
+						</tr>
+					</table>
 				</section>
 
 
@@ -420,7 +616,7 @@ docker run --name some-wordpress --link some-mysql:mysql -d -p 8181:80 wordpress
 				center: true,
 				embedded: true,
 
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				transition: 'slide', // none/fade/slide/convex/concave/zoom,
 
 				// Optional reveal.js plugins
 				dependencies: [
@@ -439,9 +635,11 @@ docker run --name some-wordpress --link some-mysql:mysql -d -p 8181:80 wordpress
 
 				if($('#'+event.type).length > 0){
 					console.log('addClass visible', event.type);
+					$('body').removeClass('hidebar')
 					$('#index').addClass('visible');
 				}else{
 					console.log('removeClass visible', event.type);
+					$('body').addClass('hidebar')
 					$('#index').removeClass('visible');
 				}
 			}
@@ -452,7 +650,8 @@ docker run --name some-wordpress --link some-mysql:mysql -d -p 8181:80 wordpress
 				'indexEcosystem',
 				'indexComposition',
 				'indexTool',
-				'indexICTU'
+				'indexICTU',
+				'presenterInfo'
 			]
 
 			for( var classname of indexClasses){
