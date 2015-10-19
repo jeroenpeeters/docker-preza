@@ -48,11 +48,14 @@
 				</a>
 			</div-->
 			<ol id="index" style="flex-grow:3;margin:0">
-				<li id="indexDockerIntro">Intro to Docker</li>
-				<li id="indexEcosystem">Ecosystem</li>
-				<li id="indexComposition">App Composition</li>
-				<li id="indexTool">Containers as Tool</li>
-				<li id="indexICTU">Docker @ ICTU</li>
+				<li id="indexDockerIntro">Docker</li>
+				<li id="indexEcosystem">Ecosysteem</li>
+				<li id="indexComposition">Composities</li>
+				<li id="indexTool">Containers als Tool</li>
+				<li id="indexPractice">Praktijk</li>
+				<li id="presenterInfo" style="max-height: 175px;">
+					<img src="images/logo-ovs.png" style="width:100px; border:0px; background: none !important;" />
+				</li>
 			</ol>
 		</div>
 
@@ -61,11 +64,15 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 
-				<section>
-					<img src="images/docker.png" style="width:300px; border:0px; background:none !important; box-shadow: none;" />
+				<section data-state="indexMain">
+					<img src="images/docker.png" style="width:300px; border:0px; background:none !important; box-shadow: none;" /><br/>
+					<span style="">
+						<img src="images/logo-interactief.png" style="width:200px; border:0px; background:none !important; box-shadow: none;" />
+						<img src="images/logo-ovs.png" style="width:100px; border:0px; background:none !important; box-shadow: none;" />
+					</span>
 				</section>
 
-				<section id="aboutme" data-state="aboutme_">
+				<section id="aboutme" data-state="indexMain">
 					<section>
 						<img src="images/jeroen.jpg" style="width:150px;  border:0px; border-radius:5px;" />
 						<div>
@@ -75,7 +82,11 @@
 					</section>
 
 					<section>
-						<img id="logo" style="width:250px;  border-radius:5px;" src="images/logo-ovs.jpg"/> <br/>
+						<img id="logo" class="no-bg" style="width:250px;  border-radius:5px;" src="images/logo-ovs.png"/> <br/>
+					</section>
+
+					<section>
+						<img id="logo" class="no-bg" style="width:800px;  border-radius:5px; margin:0 !important;" src="images/ovsoftware-bedrijven.png"/> <br/>
 					</section>
 
 					<section>
@@ -91,58 +102,81 @@
 
 				</section>
 
-				<section id="overviewindex" data-state="overviewindex_">
+				<section id="overviewindex" data-state="indexMain">
 					<h2>Overview</h2>
 					<br/><br/>
-					<div class="fragment">Intro to Docker</div>
-					<div class="fragment">Ecosystem</div>
-					<div class="fragment">Application Composition</div>
-					<div class="fragment">Containers as Tool</div>
-					<div class="fragment">Docker &amp; ICTU</div>
+					<div class="fragment">Docker</div>
+					<div class="fragment">Ecosysteem</div>
+					<div class="fragment">Composities</div>
+					<div class="fragment">Containers als Tool</div>
+					<div class="fragment">Praktijk</div>
 				</section>
 
 				<section data-state="indexDockerIntro">
 					<section>
-						<h2>Intro to Docker</h2>
+						<h2>Wat is Docker?</h2>
+						<aside class="notes">
+							Vraag: wie gehoord van/ervaring met Docker?
+						</aside>
 					</section>
 					<section>
 						<h2>Build, Ship and Run</h2><h2>Any App, Anywhere</h2>
 						<aside class="notes">
-							Belofte: self-contained apps.
+							Belofte van Docker
 						</aside>
 					</section>
 					<section>
-						<div class="fragment">Images</div>
-						<div class="fragment">Containers</div>
+						<h2>Missvatting</h2>
+						<p>Docker is een lightweight-VM</p>
 						<aside class="notes">
-							Docker Lingo
+							Proberen alle applicatieservices in 1 container te krijgen. web,db,ssh
+						</aside>
+					</section>
+					<section>
+						<h2>NEE!</h2>
+					</section>
+					<section>
+						<p>"Docker is a tool that can package an application<br/>and its dependencies in a virtual container<br/>that can run on any Linux server."<br/><br/><i>451 Research</i></p>
+						<aside class="notes">
+							Verwoord door IT onderzoeksbureau
+						</aside>
+					</section>
+					<section>
+						<p>Docker = Operating-system-level virtualization</p>
+						<aside class="notes">
+							Kernel virtualisatie. Perspectief applicatie: eigen systeem.
+							Deel kernels.
+						</aside>
+					</section>
+					<section>
+						<p>Docker = Package system</p>
+						<aside class="notes">
+							Applicatie en libraries, geen externe dependencies.
+						</aside>
+					</section>
+					<section>
+						<h2>Terminologie</h2>
+						<div class="fragment">Dockerfile</div>
+						<div class="fragment" style='font-size:80%'><i>build</i></div>
+						<div class="fragment">Image</div>
+						<div class="fragment" style='font-size:80%'><i>run</i></div>
+						<div class="fragment">Container</div>
+						<aside class="notes">
+							Dockerfile -> build -> Image -> run -> Container
 						</aside>
 					</section>
 				  <section>
-						<img src="images/docker-layers.png" /> <br />
+						<img src="images/apps-share-bins.png" />
 						<img class="fragment" src="images/virtual.png" />
-						<img class="fragment" src="images/apps-share-bins.png" />
+						<img class="fragment" src="images/docker-layers.png" /> <br />
 						<aside class="notes">
-							Operating system and Docker
+							1. non-virtual: apps share binaries
+							2. virtual: OS overhead
+							3. docker
 						</aside>
 					</section>
 					<section>
-						<img src="images/docker-image.png" style="width:700px; border:0; border-radius:2px 7px; background-color:white;" />
-						<aside class="notes">
-							Run anywhere: Self Contained Images
-						</aside>
-					</section>
-					<section>
-						<div class="fragment">Build</div>
-						<div class="fragment">Run</div>
-						<div class="fragment">Link</div>
-						<div class="fragment">Volume</div>
-						<div class="fragment">UnionFS</div>
-						<aside class="notes">
-							Docker Lingo
-						</aside>
-					</section>
-					<section>
+						<h2>Namespaces</h2>
 						<div class="fragment">pid namespace</div>
 						<div class="fragment">net namespace</div>
 						<div class="fragment">mnt namespace</div>
@@ -152,165 +186,48 @@
 						</aside>
 					</section>
 					<section>
+						<img src="images/docker-filesystems-multilayer.png" style="width:700px; border:0; border-radius:2px 7px; background-color:white;" />
+						<aside class="notes">
+							Run anywhere: Self Contained Images
+						</aside>
+					</section>
+					<section>
 						<h2>Hello world</h2>
 						<pre style="width:580px;"><code data-trim>docker run ubuntu:14.04 /bin/echo 'Hello world'</code></pre>
 						<aside class="notes">
 						</aside>
 					</section>
 					<section>
-						<h2>Hello world interactive</h2>
-						<pre style="width:480px;"><code data-trim>docker run -t -i ubuntu:14.04 /bin/bash</code></pre>
-						<aside class="notes">
-							-t: terminal, -i interactive
-						</aside>
-					</section>
-					<section>
-						<h2>Hello world detached</h2>
-						<pre style="width:610px;"><code data-trim>docker run -d ubuntu:14.04 /bin/sh -c \
+						<h2>Hello world</h2>
+						<pre style="width:610px;"><code data-trim>docker run ubuntu:14.04 /bin/sh -c \
   "while true; do echo hello world; sleep 1; done"</code></pre>
 						<aside class="notes">
-							check docker logs
 						</aside>
 					</section>
 					<section>
-						<h2>Jenkins</h2>
-						<pre style="width:380px;"><code data-trim>docker run -p 8080:8080 jenkins</code></pre>
-					</section>
-					<section>
-						<pre style="box-shadow:initial">
+						<h2>Dockerfile</h2>
+						<pre style="box-shadow:initial;width:610px;">
 							<code style="max-height:600px" data-trim>
-FROM java:openjdk-7u65-jdk
+FROM nginx
 
-RUN apt-get update && apt-get install -y wget git curl zip && rm -rf /var/lib/apt/lists/*
+ADD lib /usr/share/nginx/html/lib/
+ADD plugin /usr/share/nginx/html/plugin/
+ADD js /usr/share/nginx/html/js/
+ADD images /usr/share/nginx/html/images/
+ADD css /usr/share/nginx/html/css/
+ADD index.html /usr/share/nginx/html/
 
-ENV JENKINS_HOME /var/jenkins_home
-
-# Jenkins is ran with user `jenkins`, uid = 1000
-# If you bind mount a volume from host/vloume from a data container,
-# ensure you use same uid
-RUN useradd -d "$JENKINS_HOME" -u 1000 -m -s /bin/bash jenkins
-
-# Jenkins home directoy is a volume, so configuration and build history
-# can be persisted and survive image upgrades
-VOLUME /var/jenkins_home
-
-# `/usr/share/jenkins/ref/` contains all reference configuration we want
-# to set on a fresh new installation. Use it to bundle additional plugins
-# or config file with your custom jenkins Docker image.
-RUN mkdir -p /usr/share/jenkins/ref/init.groovy.d
-
-
-COPY init.groovy /usr/share/jenkins/ref/init.groovy.d/tcp-slave-agent-port.groovy
-
-ENV JENKINS_VERSION 1.596.2
-
-# could use ADD but this one does not check Last-Modified header
-# see https://github.com/docker/docker/issues/8331
-RUN curl -L http://mirrors.jenkins-ci.org/war-stable/$JENKINS_VERSION/jenkins.war -o /usr/share/jenkins/jenkins.war
-
-ENV JENKINS_UC https://updates.jenkins-ci.org
-RUN chown -R jenkins "$JENKINS_HOME" /usr/share/jenkins/ref
-
-# for main web interface:
-EXPOSE 8080
-
-# will be used by attached slave agents:
-EXPOSE 50000
-
-USER jenkins
-
-COPY jenkins.sh /usr/local/bin/jenkins.sh
-							</code>
-						</pre>
-					</section>
-					<section>
-						<pre><code data-trim>
-FROM eboraas/debian:stable
-MAINTAINER Ed Boraas &lt;ed@boraas.ca&gt;
-
-RUN apt-get update && apt-get -y install apache2 && apt-get clean
-
-ENV APACHE_RUN_USER www-data
-ENV APACHE_RUN_GROUP www-data
-ENV APACHE_LOG_DIR /var/log/apache2
-
-RUN /bin/ln -sf ../sites-available/default-ssl /etc/apache2/sites-enabled/001-default-ssl
-RUN /bin/ln -sf ../mods-available/ssl.conf /etc/apache2/mods-enabled/
-RUN /bin/ln -sf ../mods-available/ssl.load /etc/apache2/mods-enabled/
+RUN chmod -R a+r /usr/share/nginx/html/
 
 EXPOSE 80
-EXPOSE 443
-
-CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
-						</code></pre>
-					</section>
-					<section>
-						<pre><code style="max-height:600px" data-trim>
-FROM debian:wheezy
-
-# add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
-RUN groupadd -r mysql && useradd -r -g mysql mysql
-
-# FATAL ERROR: please install the following Perl modules before executing /usr/local/mysql/scripts/mysql_install_db:
-# File::Basename
-# File::Copy
-# Sys::Hostname
-# Data::Dumper
-RUN apt-get update && apt-get install -y perl --no-install-recommends && rm -rf /var/lib/apt/lists/*
-
-# mysqld: error while loading shared libraries: libaio.so.1: cannot open shared object file: No such file or directory
-RUN apt-get update && apt-get install -y libaio1 && rm -rf /var/lib/apt/lists/*
-
-# gpg: key 5072E1F5: public key "MySQL Release Engineering &lt;mysql-build@oss.oracle.com&gt;" imported
-RUN gpg --keyserver pool.sks-keyservers.net --recv-keys A4A9406876FCBD3C456770C88C718D3B5072E1F5
-
-ENV MYSQL_MAJOR 5.5
-ENV MYSQL_VERSION 5.5.43
-
-# note: we're pulling the *.asc file from mysql.he.net instead of dev.mysql.com because the official mirror 404s that file for whatever reason - maybe it's at a different path?
-RUN apt-get update && apt-get install -y curl --no-install-recommends && rm -rf /var/lib/apt/lists/* \
-	&& curl -SL "http://dev.mysql.com/get/Downloads/MySQL-$MYSQL_MAJOR/mysql-$MYSQL_VERSION-linux2.6-x86_64.tar.gz" -o mysql.tar.gz \
-	&& curl -SL "http://mysql.he.net/Downloads/MySQL-$MYSQL_MAJOR/mysql-$MYSQL_VERSION-linux2.6-x86_64.tar.gz.asc" -o mysql.tar.gz.asc \
-	&& apt-get purge -y --auto-remove curl \
-	&& gpg --verify mysql.tar.gz.asc \
-	&& mkdir /usr/local/mysql \
-	&& tar -xzf mysql.tar.gz -C /usr/local/mysql --strip-components=1 \
-	&& rm mysql.tar.gz* \
-	&& rm -rf /usr/local/mysql/mysql-test /usr/local/mysql/sql-bench \
-	&& rm -rf /usr/local/mysql/bin/*-debug /usr/local/mysql/bin/*_embedded \
-	&& find /usr/local/mysql -type f -name "*.a" -delete \
-	&& apt-get update && apt-get install -y binutils && rm -rf /var/lib/apt/lists/* \
-	&& { find /usr/local/mysql -type f -executable -exec strip --strip-all '{}' + || true; } \
-	&& apt-get purge -y --auto-remove binutils
-ENV PATH $PATH:/usr/local/mysql/bin:/usr/local/mysql/scripts
-
-# replicate some of the way the APT package configuration works
-# this is only for 5.5 since it doesn't have an APT repo, and will go away when 5.5 does
-RUN mkdir -p /etc/mysql/conf.d \
-	&& { \
-		echo '[mysqld]'; \
-		echo '!includedir /etc/mysql/conf.d/'; \
-	} &gt; /etc/mysql/my.cnf \
-	&& { \
-		echo '[mysqld]'; \
-		echo 'user = mysql'; \
-		echo 'datadir = /var/lib/mysql'; \
-	} &gt; /etc/mysql/conf.d/docker.cnf
-
-VOLUME /var/lib/mysql
-
-COPY docker-entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
-
-EXPOSE 3306
-CMD ["mysqld"]
-						</code></pre>
+							</code>
+						</pre>
 					</section>
 				</section>
 
 				<section data-state="indexEcosystem">
 					<section>
-						<h2>Ecosystem</h2>
+						<h2>Ecosysteem</h2>
 					</section>
 					<section>
 						<h2>Docker Hub</h2>
@@ -319,11 +236,9 @@ CMD ["mysqld"]
 					</section>
 					<section>
 						<img src="images/docker.png" style="border:0; border-radius:0; width:200px;"/><br/>
-						<ul>
-							<li>Compose</li>
-							<li>Machine</li>
-							<li>Swarm</li>
-						</ul>
+						<p>Compose</p>
+						<p>Machine</p>
+						<p>Swarm</p>
 						<aside class="notes">
 							container composition <br/>
 							machine provisioning (install docker) local,server,cloud,virtuals <br />
@@ -332,14 +247,6 @@ CMD ["mysqld"]
 					</section>
 					<section>
 						<img src="images/coreos-logo.png" style="border:0;"/>
-					</section>
-					<section>
-						<h2>Fleet by</h2><img src="images/coreos-logo.png" style="border:0; width:200px;"/>
-						<aside class="notes">
-							ETCD -> distributed key/value store <br />
-							systemd -> service definition (initd, upstart replacement) <br />
-							what about cloud?
-						</aside>
 					</section>
 					<section>
 						<h2>Flannel</h2>
@@ -362,7 +269,7 @@ CMD ["mysqld"]
 						</aside>
 					</section>
 					<section>
-						<img src="images/rancher.png" style="border:0;"/>
+						<img src="images/rancher.png" style="width:60%; border:0;"/>
 						<aside class="notes">
 							OS of 20mb + mgmt dashboard
 						</aside>
@@ -377,7 +284,7 @@ CMD ["mysqld"]
 
 				<section data-state="indexComposition">
 					<section>
-						<h2>Application Composition</h2>
+						<h2>Composities</h2>
 						<p>Manual</p>
 					</section>
 					<section>
@@ -398,38 +305,28 @@ docker run --name my-wordpress --link my-mysql:mysql -d -p 80:80 wordpress
 						<pre><code data-trim>
 
 web:
-  image: myregistry/mywebapp:1.0
+  image: wordpress
   links:
     - db
   ports:
-    - "8000:8000"
+    - 8080:80
 db:
-  image: postgres
+  image: mysql:5.5
+	volumes:
+	  - ./wp-data:/var/lib/mysql
+	environment:
+	  - MYSQL_ROOT_PASSWORD=rootpw
 						</code></pre>
 						<aside class="notes">
 							yaml file <br/>
 							docker-compose up
 						</aside>
 					</section>
-					<section>
-						<pre><code data-trim>
-
-web:
-  image: myregistry/mywebapp:1.0
-  volumes_from:
-    - ftp
-ftp:
-  image: stilliard/pure-ftpd
-  volumes:
-    - /share/ftphome
-						</code></pre>
-					</section>
-
 				</section>
 
 				<section data-state="indexTool">
 					<section>
-						<h2>Container as a Tool</h2>
+						<h2>Container als Tool</h2>
 					</section>
 					<section>
 						<h2>Maven</h2>
@@ -474,15 +371,19 @@ docker run -it --rm --name my-maven-project \
 					</section>
 				</section>
 
-				<section data-state="indexICTU">
+				<section data-state="indexPractice">
 					<section>
-						<h2>Docker @ ICTU</h2>
+						<h2>Praktijk</h2>
+					</section>
+					<section>
+						<p>Ontwikkel- &amp; Testomgevingen</p>
+						<p class="fragment">Productieomgevingen</p>
 					</section>
 
 					<section>
-						<h2>Hoe het begon</h2>
 						<img src="images/trein1.png" style="width:700px; border:0; border-radius:2px 7px; background-color:white;" />
 						<aside class="notes">
+							station = vm/fysieke machine.
 							1 trein op rails, botsingen. lange wachttijden
 						</aside>
 					</section>
@@ -496,11 +397,11 @@ docker run -it --rm --name my-maven-project \
 					</section>
 
 					<section>
-						<h2>Tooling</h2>
 						<img src="images/tooling1.png" style="width:700px; border:0; border-radius:2px 7px; background-color:white;" />
 						<aside class="notes">
-							Jenkins, Sonar, 1 test-server, 1-ART server.
-							1 Stack voor hele afdeling
+							1 Jenkins, 1 Sonar, 1 test-server, 1-ART server.
+							1 Stack voor hele afdeling.
+							centraal beheerd
 						</aside>
 					</section>
 
@@ -509,7 +410,8 @@ docker run -it --rm --name my-maven-project \
 						<img src="images/tooling2.png" style="width:700px; border:0; border-radius:2px 7px; background-color:white;" />
 						<aside class="notes">
 							Jenkins, Sonar, 1 test-server, 1-ART server.
-							Stack per team
+							Stack per team.
+							decentraal beheer door team
 						</aside>
 					</section>
 
@@ -573,10 +475,23 @@ docker run --name some-wordpress --link some-mysql:mysql -d -p 8181:80 wordpress
 				</section -->
 
 				<section data-state="presenterInfo">
+					<img id="logo" class="no-bg" style="width:150px;  border-radius:5px;" src="images/logo-ovs.png"/>
 					<table>
 						<tr>
 							<td style="border:0"><img style="width:50px;border-radius:5px" id="logo" src="images/email.png" /></td>
-							<td style="border:0;vertical-align:middle">jeroen@peetersweb.nl</td>
+							<td style="border:0;vertical-align:middle">info@ovsoftware.com</td>
+						</tr>
+						<tr>
+							<td style="border:0"><img style="width:50px;border-radius:5px" id="logo" src="images/email.png" /></td>
+							<td style="border:0;vertical-align:middle">jeroen.peeters@ovsoftware.com</td>
+						</tr>
+						<tr>
+							<td style="border:0"><img style="width:50px;border-radius:5px" id="logo" src="images/rss.png" /></td>
+							<td style="border:0;vertical-align:middle">inter-actief.jeroenpeeters.nl</td>
+						</tr>
+						<!-- <tr>
+							<td style="border:0"><img style="width:50px;border-radius:5px" id="logo" src="images/rss.png" /></td>
+							<td style="border:0;vertical-align:middle">ovsoftware.nl</td>
 						</tr>
 						<tr>
 							<td style="border:0"><img style="width:50px;border-radius:5px" id="logo" src="images/github.png" /></td>
@@ -589,11 +504,7 @@ docker run --name some-wordpress --link some-mysql:mysql -d -p 8181:80 wordpress
 						<tr>
 							<td style="border:0"><img style="width:50px;border-radius:5px" id="logo" src="images/linkedin.png" /></td>
 							<td style="border:0;vertical-align:middle">jeroenp</td>
-						</tr>
-						<tr>
-							<td style="border:0"><img style="width:50px;border-radius:5px" id="logo" src="images/rss.png" /></td>
-							<td style="border:0;vertical-align:middle">jeroenpeeters.nl</td>
-						</tr>
+						</tr> -->
 					</table>
 				</section>
 
@@ -629,34 +540,52 @@ docker run --name some-wordpress --link some-mysql:mysql -d -p 8181:80 wordpress
 				]
 			});
 
+			var hideWithForce = undefined;
+			hideIndexBar = function(_hideWithForce){
+				hideWithForce = _hideWithForce;
+				$('body').addClass('hidebar')
+				$('#index').removeClass('visible');
+			}
+
+			showIndexBar = function(){
+				if(!hideWithForce){
+					$('body').removeClass('hidebar')
+					$('#index').addClass('visible');
+				}
+			}
+
 			indexEvents = function(event) {
 				$('#index li').removeClass('current');
 				$('#'+event.type).addClass('current');
-
+				console.log(event);
 				if($('#'+event.type).length > 0){
 					console.log('addClass visible', event.type);
-					$('body').removeClass('hidebar')
-					$('#index').addClass('visible');
+					showIndexBar(	)
 				}else{
 					console.log('removeClass visible', event.type);
-					$('body').addClass('hidebar')
-					$('#index').removeClass('visible');
+					hideIndexBar()
 				}
 			}
 
 			var indexClasses = [
-				'overviewindex_',
+				'indexMain',
 				'indexDockerIntro',
 				'indexEcosystem',
 				'indexComposition',
 				'indexTool',
-				'indexICTU',
+				'indexPractice',
 				'presenterInfo'
 			]
 
 			for( var classname of indexClasses){
 				Reveal.addEventListener(classname, indexEvents, false);
 			}
+
+			$(window).keydown(function(event){
+		    if(event.keyCode == 65){ // 'a' pressed
+					hideIndexBar(true);
+				}
+			});
 
 		</script>
 

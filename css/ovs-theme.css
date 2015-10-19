@@ -103,6 +103,23 @@ img {
   align-items: center;
 }
 
+
+.indexMain body, .presenterInfo body {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fefcea+0,f4c913+100 */
+  background: rgb(254,252,234); /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover,  rgba(254,252,234,1) 0%, rgba(244,201,19,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(254,252,234,1)), color-stop(100%,rgba(244,201,19,1))); /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover,  rgba(254,252,234,1) 0%,rgba(244,201,19,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover,  rgba(254,252,234,1) 0%,rgba(244,201,19,1) 100%); /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover,  rgba(254,252,234,1) 0%,rgba(244,201,19,1) 100%); /* IE10+ */
+  background: radial-gradient(ellipse at center,  rgba(254,252,234,1) 0%,rgba(244,201,19,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', endColorstr='#f4c913',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.presenterInfo #index > .current {
+  background: #F9DF6E;
+}
+
 .indexDockerIntro body {
   background: #87e0fd; /* Old browsers */
   background: -moz-radial-gradient(center, ellipse cover,  #87e0fd 0%, #53cbf1 40%, #05abe0 100%); /* FF3.6+ */
@@ -163,7 +180,7 @@ img {
   background: #ffd65e;
 }
 
-.indexICTU body {
+.indexPractice body {
   background: #e570e7; /* Old browsers */
   background: -moz-radial-gradient(center, ellipse cover,  #e570e7 0%, #c85ec7 47%, #a849a3 100%); /* FF3.6+ */
   background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#e570e7), color-stop(47%,#c85ec7), color-stop(100%,#a849a3)); /* Chrome,Safari4+ */
@@ -174,6 +191,10 @@ img {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e570e7', endColorstr='#a849a3',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
-.indexICTU #index > .current {
+.indexPractice #index > .current {
   background: #e570e7;
+}
+
+img.no-bg {
+  background: none !important;
 }

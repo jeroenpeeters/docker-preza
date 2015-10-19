@@ -1,0 +1,41 @@
+
+Continuous Deployment met Docker containers
+
+Steeds vaker zijn developers gewend aan tools als Jenkins voor het automatisch bouwen van applicaties.
+Ook deployment naar een OTAP omgeving is niemand wereldvreemd. Echter, er is vaak maar één ontwikkel- of testomgeving
+waarop de configuratie ook nog eens met de hand wordt bijgehouden. Deployment naar productie staat vaak los van ontwikkel & test
+wat tot de introductie van een heel scala aan nieuwe fouten kan leiden. In deze lunchlezing vertelt Jeroen Peeters over
+automatische deployment van applicaties in Docker containers. Welke voordelen biedt deze aanpak? Wat is de impact voor
+beheerteams en organisaties? Hoe verandert de mindset van zowel ontwikkelaars als beheerders? Kortom: hoe veranderen Docker
+containers het ontwikkel- en beheerproces? Docker is nog maar net twee jaar oud, maar vanaf jaar één heeft Jeroen ervaring
+opgedaan met Docker. Bij zijn huidige klant wordt Docker breed ingezet in de ontwikkel- en teststraten en binnenkort gaan
+de eerste applicaties met Docker in productie.
+
+
+-------
+
+1. Veel mensen zien of gebruiken docker als lightweight VM -> NEE! Docker is een process jail. 1 root/main proces met container.
+2. Docker = kernelvirtualisatie / operating-system-level virtualization
+!!!! 3. there are others: lmctfy, LXC, OpenVZ
+
+"Docker is a tool that can package an application and its dependencies in a virtual container that can run on any Linux server." - 451 Research
+
+Docker img Architecture - https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Docker-linux-interfaces.svg/400px-Docker-linux-interfaces.svg.png (already saved)
+
+History of docker
+
+Solomon Hykes started Docker as an internal project within dotCloud, a platform-as-a-service company,[31] with initial contributions by other dotCloud engineers including Andrea Luzzardi and Francois-Xavier Bourlet. Jeff Lindsay also became involved as an independent collaborator. Docker represents an evolution of dotCloud's proprietary technology, which itself built on earlier open-source projects such as Cloudlets.
+
+Docker was released as open source in March 2013.[11] On March 13, 2014, with the release of version 0.9, Docker dropped LXC as the default execution environment and replaced it with its own libcontainer library written in the Go programming language.[7][12] As of April 13, 2015, the project had over 20,700 GitHub stars (making it the 20th most-starred GitHub project), over 4,700 forks, and nearly 900 contributors.[32]
+
+A May 2015 analysis showed the following organizations as main contributors to Docker: the Docker team, Red Hat, IBM, Google, Cisco Systems and Amadeus IT Group.[33]
+
+Collaboration[edit]
+On July 23, 2013, dotCloud, Inc., the commercial entity behind Docker, announced that former Gluster and Plaxo CEO Ben Golub had joined the company, citing Docker as the primary future focus of the company.[34]
+On September 19, 2013, Red Hat and Docker announced a significant collaboration around Fedora, Red Hat Enterprise Linux, and OpenShift.[35]
+On January 22, 2014, Docker announced that it had completed a $15 million Series B venture capital round, led by Greylock Partners.[36]
+On July 23, 2014, Docker acquired Orchard, makers of Fig.[37]
+On September 16, 2014, Docker announced that it had completed a $40 M Series C round, led by Sequoia Capital.[38]
+On October 15, 2014, Microsoft announced integration of the Docker engine into the next (2016) Windows Server release, and native support for the Docker client role in Windows.[39][40]
+On December 4, 2014, IBM announced a strategic partnership with Docker that enables enterprises to more efficiently, quickly and cost-effectively build and run the next generation of applications in the IBM Cloud.[41]
+On June 22, 2015, Docker and several other companies announced that they are working on a new vendor- and operating-system-independent standard for software containers.[42][43]
