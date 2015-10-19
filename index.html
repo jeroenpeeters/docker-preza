@@ -376,10 +376,27 @@ docker run -it --rm --name my-maven-project \
 						<h2>Praktijk</h2>
 					</section>
 					<section>
-						<p>Ontwikkel- &amp; Testomgevingen</p>
-						<p class="fragment">Productieomgevingen</p>
+						<h2>Continuous Delivery</h2>
 					</section>
-
+					<section>
+						<img src="images/scrum.png" style="width:700px; border:0; border-radius:2px 7px; background-color:white;" />
+					</section>
+					<section>
+						<p class="fragment">Scrum: Shippable increment</p>
+						<p class="fragment">CD: Elke verandering is shippable</p>
+						<aside class="notes">
+							scrum: hoe weet je dat het shippable is?
+							niet einde elke sprint
+						</aside>
+					</section>
+					<section>
+						<p class="fragment">Automatische Builds (Jenkins)</p>
+						<p class="fragment">Deployment naar Test</p>
+						<p class="fragment">Automatische regressietest</p>
+					</section>
+					<section>
+						<img src="images/continuous-delivery-cycle.jpg" style="width:700px; border:0; border-radius:2px 7px; background-color:white;" />
+					</section>
 					<section>
 						<img src="images/trein1.png" style="width:700px; border:0; border-radius:2px 7px; background-color:white;" />
 						<aside class="notes">
@@ -416,41 +433,40 @@ docker run -it --rm --name my-maven-project \
 					</section>
 
 					<section>
-						<h2>Docker as a Service</h2>
+						<h2>Beheer</h2>
+					</section>
 
+					<section>
+						<p>Handmatige installatie/configuratie</p>
+						<p class="fragment">Provisioning met Ansible/Puppet</p>
 						<aside class="notes">
-							<ul>
-								<li>Interface voor Docker Cluster</li>
-								<li>Gebaseerd op Docker Compose</li>
-							</ul>
+							ansible/puppet: duurt lang, wat als er iets mis gaat?
 						</aside>
 					</section>
 
 					<section>
-						<h2>Discovery as a Service</h2>
-						<ul>
-							<li>DNS entry per container</li>
-						</ul>
+						<p><i>van</i></p>
+						<p>Applicatieservers</p>
+						<p><i>naar</i></p>
+						<p>Serviceinfrastructuur</p>
 						<aside class="notes">
-							Elke container krijgt eigen IP + HostName in DNS, skydns
+							voor container deployment.
+							verwaching infrastructuur: load-balancers, redundant, service discovery
 						</aside>
 					</section>
 
 					<section>
-						<h2>Application as a Service</h2>
-						<ul>
-							<li>Application = { gelinkte containers }</li>
-							<li>Dashboard voor Starten/Stoppen</li>
-							<li>API voor applicatie creatie</li>
-						</ul>
-						<aside class="notes">
-							Automation vanuit Jenkins
-						</aside>
+						<h2>DevOps</h2>
 					</section>
 
 					<section>
-						<h2>Demo</h2>
+						<h2>Delivery</h2>
+						<img src="images/docker-registry.jpg" style="border:none;" />
+						<aside class="notes">
+							docker registry
+						</aside>
 					</section>
+
 				</section>
 
 				<!-- section data-state="indexHandson">
@@ -475,37 +491,47 @@ docker run --name some-wordpress --link some-mysql:mysql -d -p 8181:80 wordpress
 				</section -->
 
 				<section data-state="presenterInfo">
-					<img id="logo" class="no-bg" style="width:150px;  border-radius:5px;" src="images/logo-ovs.png"/>
-					<table>
-						<tr>
-							<td style="border:0"><img style="width:50px;border-radius:5px" id="logo" src="images/email.png" /></td>
-							<td style="border:0;vertical-align:middle">info@ovsoftware.com</td>
-						</tr>
-						<tr>
-							<td style="border:0"><img style="width:50px;border-radius:5px" id="logo" src="images/email.png" /></td>
-							<td style="border:0;vertical-align:middle">jeroen.peeters@ovsoftware.com</td>
-						</tr>
-						<tr>
-							<td style="border:0"><img style="width:50px;border-radius:5px" id="logo" src="images/rss.png" /></td>
-							<td style="border:0;vertical-align:middle">inter-actief.jeroenpeeters.nl</td>
-						</tr>
-						<!-- <tr>
-							<td style="border:0"><img style="width:50px;border-radius:5px" id="logo" src="images/rss.png" /></td>
-							<td style="border:0;vertical-align:middle">ovsoftware.nl</td>
-						</tr>
-						<tr>
-							<td style="border:0"><img style="width:50px;border-radius:5px" id="logo" src="images/github.png" /></td>
-							<td style="border:0;vertical-align:middle">jeroenpeeters</td>
-						</tr>
-						<tr>
-							<td style="border:0"><img style="width:50px;border-radius:5px" id="logo" src="images/twitter.png" /></td>
-							<td style="border:0;vertical-align:middle">jeroenpeeters</td>
-						</tr>
-						<tr>
-							<td style="border:0"><img style="width:50px;border-radius:5px" id="logo" src="images/linkedin.png" /></td>
-							<td style="border:0;vertical-align:middle">jeroenp</td>
-						</tr> -->
-					</table>
+					<section>
+						<h3>Kortom</h3>
+						<p>Docker: build, ship, run anywhere</p>
+						<p>Applicatie met Dependencies</p>
+						<p>Enabler voor Continuous Delivery</p>
+						<p>Mindset Change Ontwikkeling &amp; Beheer</p>
+					</section>
+
+					<section>
+						<img id="logo" class="no-bg" style="width:150px;  border-radius:5px;" src="images/logo-ovs.png"/>
+						<table>
+							<tr>
+								<td style="border:0"><img style="width:50px;border-radius:5px" id="logo" src="images/email.png" /></td>
+								<td style="border:0;vertical-align:middle">info@ovsoftware.com</td>
+							</tr>
+							<tr>
+								<td style="border:0"><img style="width:50px;border-radius:5px" id="logo" src="images/email.png" /></td>
+								<td style="border:0;vertical-align:middle">jeroen.peeters@ovsoftware.com</td>
+							</tr>
+							<tr>
+								<td style="border:0"><img style="width:50px;border-radius:5px" id="logo" src="images/rss.png" /></td>
+								<td style="border:0;vertical-align:middle">inter-actief.jeroenpeeters.nl</td>
+							</tr>
+							<!-- <tr>
+								<td style="border:0"><img style="width:50px;border-radius:5px" id="logo" src="images/rss.png" /></td>
+								<td style="border:0;vertical-align:middle">ovsoftware.nl</td>
+							</tr>
+							<tr>
+								<td style="border:0"><img style="width:50px;border-radius:5px" id="logo" src="images/github.png" /></td>
+								<td style="border:0;vertical-align:middle">jeroenpeeters</td>
+							</tr>
+							<tr>
+								<td style="border:0"><img style="width:50px;border-radius:5px" id="logo" src="images/twitter.png" /></td>
+								<td style="border:0;vertical-align:middle">jeroenpeeters</td>
+							</tr>
+							<tr>
+								<td style="border:0"><img style="width:50px;border-radius:5px" id="logo" src="images/linkedin.png" /></td>
+								<td style="border:0;vertical-align:middle">jeroenp</td>
+							</tr> -->
+						</table>
+					</section>
 				</section>
 
 

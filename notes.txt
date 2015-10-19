@@ -1,4 +1,35 @@
 
+Praktijk
+
+# Continuous Deployment
+
+- Scrum: Shippable increment - hoe weet je dat het shippable is?
+- CD: Elke verandering is shippable
+
+# Ontwikkeling
+
+- Automatische Builds (Jenkins)
+- Automatische Deployment naar Test
+- Automatische regressietest
+
+# Productie
+
+- Handmatige installatie/configuratie
+- Provisioning met Ansible/Puppet
+
+
+# Beheer
+
+- Van applicatieservers
+- Naar serviceinfrastructuur
+- Optimaal: DevOps Team
+- Geen microbeheer -> service beheer
+- Beheer van service containers
+
+
+
+
+
 Continuous Deployment met Docker containers
 
 Steeds vaker zijn developers gewend aan tools als Jenkins voor het automatisch bouwen van applicaties.
